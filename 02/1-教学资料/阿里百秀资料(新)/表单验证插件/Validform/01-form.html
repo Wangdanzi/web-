@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+
+        form{
+            width: 300px;
+            margin:100px auto;
+        }
+        input{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <form  id="form1" >
+        用户名：
+        <div>
+            <input type="text" name="username" datatype="s1-10"  errormsg="长度为1-10字符串！" sucmsg=" ">
+            <span class="Validform_checktip"></span>
+        </div>
+
+
+        邮箱
+        <input type="text" name="email" >
+        <div>
+            密码：
+            <input type="password" name="pwd" id="" datatype="*6-16" errormsg="密码长度为6-16位">
+            <span class="Validform_checktip"></span>  
+        </div>
+        <input type="button" value="提交">  
+
+    </form>
+    <!-- 先引入jquery  在引入插件  -->
+    <script src="../jquery-1.12.4.js"></script> 
+    <script src="./Validform_v5.3.2.js"></script>
+
+    <script>  
+            //初始化，就这么简单      	
+            $("#form1").Validform({
+                tiptype:3 //在当前元素的兄弟中找提示盒子
+            });
+
+            $.Tipmsg.r='';//修改验证通过的 提示文字
+    </script>
+
+
+</body>
+</html>

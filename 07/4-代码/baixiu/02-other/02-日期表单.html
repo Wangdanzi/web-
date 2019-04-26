@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="datetime-local" value="2018-08-08T08:08">
+    <!-- 2018-08-08 12:12:12
+        这个表单支持时间的格式 什么样的？ 2018-08-01T01:57   
+    -->
+    <!-- 时间格式化插件 -->
+    <script src="./moment.min.js"></script>
+    <script>
+        //获取系统的当前时间
+        var  date = new Date();
+        console.log(date); 
+        // Wed Aug 29 2018 11:43:02 GMT+0800 (中国标准时间) --->  2018-08-01T01:57   
+        // 字符串 分割 拼接 
+        //时间格式化插件  moment.js  
+        //语法 moment(时间).format(指定格式); 
+        //格式化字符 Y年 M月 D日 小时H 分钟m  秒s 
+
+        // var str = moment(date).format('YYYY年M月D日 H小时m分钟s秒');
+        // console.log(str);
+
+        //2018-08-08 08:08:08
+
+         var str = moment(date).format('YYYY-MM-DD HH:mm:ss');
+        console.log(str);
+
+        // document.querySelector('input').value = moment(date).format('YYYY-MM-DDTHH:mm');
+        // moment函数如果不传参，插件默认去系统当前时间
+        document.querySelector('input').value = moment().format('YYYY-MM-DDTHH:mm');
+
+
+        
+
+    </script>
+</body>
+</html>

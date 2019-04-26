@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="pagination.css">
+    <style>
+        .box {
+            width: 800px;
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 存放分页标签容器 -->
+    <div class="box"></div>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script src="./jquery.pagination.js"></script>
+    <script>
+        var  num = 360; //数据库中数据总数
+        //根据总数生成分页标签 
+        $('.box').pagination(num,{
+            prev_text: '上一页',
+            next_text: '下一页',
+            current_page: 4, //当前选中页面
+            num_display_entries: 5, //连续显示分页标签的个数
+            num_edge_entries: 1, //分页标签收尾显示个数
+            load_first_page: false, //页面初始化时，不执行回调函数
+            callback: function (index) {
+                alert(index); //获取当前分页按钮对应页面的索引值
+            }
+        });
+    </script>
+</body>
+</html>

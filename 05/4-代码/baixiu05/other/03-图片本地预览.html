@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- accpet属性显示选中上传文件类型 -->
+    <input type="file" accept="image/*" multiple>
+    <img src="" alt="">
+    <script>
+        //图片本地预览效果
+        //当文件域选中一个图片后，获取该图片的地址，赋值给img标签的src
+        document.querySelector('input').onchange = function () {
+            //获取选中文件
+            console.log(this.files);   
+            //this.files 中存放是选中文件的列表
+            //获取选中第一个图片
+            var file = this.files[0];
+            console.log(file);
+            //获取选中文件地址
+            //URL.createObjectURL(文件) 返回该文件url地址
+            var url = URL.createObjectURL(file);            
+            document.querySelector('img').src = url;                     
+        }
+    </script>
+</body>
+</html>

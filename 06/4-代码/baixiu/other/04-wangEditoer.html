@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 400px;
+            border: 1px solid red;
+            width: 90%;
+        }
+        textarea {
+            width: 500px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <textarea></textarea>
+    <!-- 1-引入插件 -->
+    <script src="./wangEditor.min.js"></script>
+    <script>
+        var E = window.wangEditor;
+        var editor = new E('#box');     
+        // 自定义菜单配置
+        editor.customConfig.menus = [
+        'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        // 'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        // 'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'emoticon',  // 表情
+        'image',  // 插入图片
+        'table',  // 表格
+        // 'video',  // 插入视频
+        // 'code',  // 插入代码
+        'undo',  // 撤销
+        'redo'  // 重复
+        ];
+        // 监控富文本编辑内容的变化，同步更新到 textarea
+        editor.customConfig.onchange = function (html) {
+            //获取富文本编辑器的内容，设置textarea 
+            //参数html 就是富文本编辑器中 当前内容
+            console.log(html);            
+            document.querySelector('textarea').value = html;
+           
+        }
+        editor.create();
+    </script>
+</body>
+</html>

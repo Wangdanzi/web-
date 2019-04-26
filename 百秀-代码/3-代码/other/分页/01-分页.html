@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .info {
+            height: 200px;
+            border: 1px solid red;
+        }
+        span {
+            float: left;
+            padding: 5px 10px; 
+            border: 1px solid #999;
+            margin: 0 5px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        span.active {
+            background-color: #999;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="info"></div>
+    <script>
+        var size = 56; 
+        //页码
+        var page =Math.ceil(size/10);
+        //根据page的值生成标签
+        var str = '<span>上一页</span>';
+        for(var i = 0; i < page; i++) {
+            if(i== 0) {
+                str += '<span class="active">'+ (i + 1)+'</span>';
+            } else {
+                str += '<span>'+ (i + 1)+'</span>';
+            }
+           
+
+        }
+        str += '<span>下一页</span>';
+        document.querySelector('.info').innerHTML = str;
+
+    </script>
+</body>
+</html>

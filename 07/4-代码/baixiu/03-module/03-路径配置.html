@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./require.js" data-main="./js/one/two/three/"></script>
+    <script>
+        // require(['./js/one/two/three/four/five/zidongqiaodaimachajian', 
+        // './js/one/two/three/six/seven/zidongzhaobugchajian'], function () {})
+
+        // require(['four/five/zidongqiaodaimachajian',
+        //         'six/seven/zidongzhaobugchajian'], function () {})
+
+        //模块化路径配置： 可以任何路径都简化非常简单
+        // require(['a', 'b'],function () {})
+        //配置路径
+        require.config({
+            baseUrl:'/study/baixiu/03-module/js/one/two/three/',  //设置公共路径  一般绝对路径
+            paths: {    //设置路径别名(更好用名字)
+                code: 'four/five/zidongqiaodaimachajian',
+                bug: 'six/seven/zidongzhaobugchajian'
+            }
+        });
+
+        // 别名  = baseurl + 别名对应地址
+        require(['code', 'bug'], function () {});
+    </script>
+</body>
+</html>

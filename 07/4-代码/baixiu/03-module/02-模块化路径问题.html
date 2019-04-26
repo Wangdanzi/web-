@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="./require.js" data-main="./js/"></script>
+    <script>
+        //模块化路径查找
+        //1-不做任何配置，直接以当前文件的路径作为参照(从文件当前位置去找)
+        // require(['./js/a', './js/b', './js/c'], function () {});
+        //2-在script标签上设置data-main属性，在data-main设置基础路径  
+        // 最终的路径 = data-main路径 + 文件路径
+        // require(['a', 'b', 'c'], function () {});
+    </script>
+</body>
+</html>

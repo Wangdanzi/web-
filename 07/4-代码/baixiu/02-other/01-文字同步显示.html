@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <input type="text" name="" id="">
+        <h1>×</h1>
+        <h2>0</h2>
+
+        <script>
+            //h1中同步显示 输入框中的文字
+            //keydown keyup
+            //change 当表单状态改变时触发
+            //change 会在用户上输入完成，表单失去焦点后触发 
+            // document.querySelector('input').onchange = function () {
+            //     document.querySelector('h1').innerHTML = this.value;
+            // }
+            // h5新增 oninput 当用户输入时触发
+            document.querySelector('input').oninput = function () {
+                document.querySelector('h1').innerHTML = this.value;
+                document.querySelector('h2').innerHTML = this.value.length;
+            } 
+        </script>
+</body>
+</html>

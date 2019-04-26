@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 引入模块化插件 -->
+    <script src="./require.js"></script>
+    <script>
+        //1-定义一个模块（插件）
+        // 1-每个模块要有自动独立的作用域  函数实现
+        // 2-每个模块时要给单独js文件
+        //定义的语法：
+        //define('模块名称', [依赖项]，function() {
+            //模块的功能代码
+        //});
+
+        //模块名称 一般不用写 直接使用匿名模块
+        //依赖项 此插件依赖于别的插件 
+
+        //2-引用这个模块
+        //引入的语法
+        // require([模块路径], function () {
+            //当模块引入完成后，要执行代码
+        //});
+            
+        // 1-引入插件
+        // require(['./js/a'], function () {
+        //     console.log('a模块引入完成');
+        // })
+
+        //2-模块有导出项暴露给外界的数据）情况
+        // require(['./js/a', './js/b'], function () {})
+        //获取模块b导出项 , 在function的中设置对应形参即可获取
+        //  require(['./js/b'], function (mb) {
+        //      console.log(mb);//获取模块导出项 
+        // })
+
+        //导出项： 模块要暴露给外界数据
+        //依赖项： 模块依赖于别的模块 
+
+        //引入多个模块
+        //要求模块的引入顺序和形参 要一一对应 
+        // require(['./js/a', './js/b', './js/c'], function (ma, mb, mc) {
+        //     console.log(mb);
+        //     console.log(mc);
+        // })
+        //优化： 将有导出项的模块写在前面
+        // require(['./js/b', './js/c', './js/a'], function (mb, mc) {
+        //     console.log(mb);
+        //     console.log(mc);
+        // })
+
+
+        //模块有依赖项的情况 
+        // require(['./js/d'], function () {
+
+        // })
+
+        require(['./js/e'], function (){});
+
+
+        //知识点：
+        //1-如何定义模块 define()
+        //2-如何引入  require()
+        //3-设置导出项 return 
+        //4-设置依赖项 define([依赖项，依赖项], function () { })
+
+        // 第三方插件能否模块化？
+        //我们自己 用 define()定义   使用require()进行引入
+        // 实际工作大量使用第三方插件，能否require进行引入？
+        // 目前主流插件都是支持模块化的， 可能会有一些古老的插件，是不支持模块化
+        //查看插件是否支持模块化， 
+        //1 -去去官网 查看 
+        //2-去插件中找是否使用define()函数进行定义
+
+
+        //有些插件不支持模块化,缺少了什么：  
+        //模块化插件明确知道自己的依赖项 和导出项 
+        //非模块插件也有导出项， 不知道自己依赖项 
+        //如果使用不支持模块的第三方插件，要给这些插件配置他们依赖项
+
+
+        
+
+
+
+
+    </script>
+</body>
+</html>

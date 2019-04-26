@@ -1,0 +1,148 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h1 id="xhr2-">XHR2 调用接口上传文件</h1>
+<pre><code class="lang-js">/**
+ * 异步上传文件
+ */
+$(&#39;#upload&#39;).on(&#39;change&#39;, function () {
+      // FormData用于管理表单数据的
+      var  form=document.querySelector(&quot;#form1&quot;);
+      //formData对象 管理form表单
+      var  formData=new FormData(form);
+
+      // 发送给服务器 
+      var  xhr=new XMLHttpRequest();
+      xhr.open(&#39;post&#39;,&#39;./02-formData.php&#39;);
+      xhr.send(formData); //直接发送formData 
+
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 &amp;&amp; xhr.status==200){
+          var r=xhr.responseText;
+        }
+      }
+})
+</code></pre>
+<blockquote>
+<p>🚩 源代码: step-82</p>
+</blockquote>
+<p>jQuery 也是可以的（内部仍然是使用的 XMLHttpRequest level 2）</p>
+<pre><code class="lang-js">/**
+ * 异步上传文件
+ */
+$(&#39;#upload&#39;).on(&#39;change&#39;, function () {
+  // 准备要上传的数据
+  var formData = new FormData()
+  formData.append(&#39;file&#39;, this.files[0])
+
+  // 发送 AJAX 请求，上传文件
+  $.ajax({
+    url: &#39;/admin/upload.php&#39;,  
+    contentType: false, //设置编码类型
+    processData: false, //设置传递值方式
+    data: formData,
+    type: &#39;post&#39;,
+    success: function (res) {
+      if (res.success) {
+        $(&#39;#image&#39;).val(res.data).siblings(&#39;.thumbnail&#39;).attr(&#39;src&#39;, res.data).fadeIn()
+      } 
+    }
+  })
+})
+</code></pre>
+<p>1、contentType:</p>
+<pre><code>(默认: &quot;application/x-www-form-urlencoded&quot;) 发送信息至服务器时内容编码类型。
+默认值适合大多数情况。如果你明确地传递了一个content-type给 $.ajax() ,必定会发送给服务器（即使没有数据要发送）
+</code></pre><p>2、processData</p>
+<pre><code>(默认: true) 默认情况下，通过data选项传递进来的数据，如果是一个对象(技术上讲只要不是字符串)，都会处理转化成一个查询字符串，
+以配合默认内容类型 &quot;application/x-www-form-urlencoded&quot;。如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
+</code></pre><p>3、FormData</p>
+<pre><code>XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,
+我们还可以使用XMLHttpRequest的send()方法来异步的提交这个&quot;表单&quot;.比起普通的ajax,
+使用FormData的最大优点就是我们可以异步上传一个二进制文件.
+</code></pre>
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

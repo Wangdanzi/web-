@@ -1,0 +1,232 @@
+乱码出现的原因： 编码和解码格式不一致；
+
+1-XMLHttpRequest2.0
+    1-超时
+    xhr.timeout = 2000;
+    xhr.ontimeout = function () { // 处理超时的事件 }
+
+    2-管理表单数据对象 FormData 
+    var formData = new FormData(表单);
+    xhr.open('post', 'test.php');
+    //1-必须是post方式  2-不需要手动设置请求头，浏览器会自动设置一个合适请求头
+    xhr.send(formData);
+
+    3-监听文件上传进度
+    xhr.upload.onprogress = function (e) {
+        //获取比值
+        var value = e.loaded / e.total; 
+    }
+2-同源跨域 及解决方式：
+    同源： 协议 域名 端口 三种完全相同 是同源 否则 跨域； 
+    跨域会受到浏览器的限制：
+    1-不能操作DOM
+    2-不能共享cookie
+    3-不能发送的ajax请求
+
+    用jsonp 解决跨域请求的问题： 
+    使用方法： 
+    $.ajax({
+        dataType: 'jsonp'
+    })
+
+
+    当设置dataType:jsonp, $.ajax内部使用script的src属性跨域请求的服务器；
+
+    具体的步骤：
+    1-前端先定义好一个方法,利用script将方法名传给后台
+    2-后台获取前端传递的方法名， 在方法名后面拼括号 ，在括号中填充json数据
+    3-后台将拼接好方法调用，返回给前端
+    4-前端接受到带有数据方法调用后，会立即执行，即可获取到后台返回的数据；
+
+    注意：
+    1-jsonp 必须是前后端配合完成
+    2-jsonp 只能是get请求方式；
+
+    前端
+    function say(obj) {
+        console.log(obj);
+    }
+
+    <script src="test.php?callback=say"></scrip>
+
+    后台：
+
+    $_GET['callback'].'()';  //say({"name":"zs", "age": 18});
+
+    服务端跨域： 
+    允许所有的域名来访问此方式
+    header("Access-Control-Allow-Origin:*");
+
+
+阿里百秀项目：
+    个人博客
+
+一、 项目开发流程： 
+    这只是大致的一个过程，不同公司会有差异；    
+    需求设计： 考虑做这个项目目的？ 
+    原型设计： 将项目构思 画草图 
+    UI设计 ：  对原型进行美化  psd  切图 
+    技术选型：  考虑着项目开发成本， 考虑团队实力
+    数据库设计 ：  后台或者DBA 设计数据库 
+    项目架构设计：  准备项目文件结构 项目代码结构
+    迭代开发： 开发 自测 
+    测试：     集中测试
+    上线部署： 将项目放到公共互联网上，让用户访问
+
+
+php文件提示代码第0行有错误： 原因 路径上有中文！！！;
+
+二、 php操作mysql数据：
+    1-连接数据库  mysqli_connect();
+    2-准备sql语句(php中准备的sql)
+    3-将sql语句传递给数据库执行  mysqli_query();
+    4-分析执行结果
+    5-关闭数据库 mysqli_close(); 
+    复习php操作mysql数据的方法：
+        mysqli_connect();
+        mysqli_query();
+        mysqli_close(); 
+        mysqli_fetch_assoc(); //从结果集中一次读取一行数据，以关联数组的形式返回
+        mysqli_num_rows(); //获取结果集行数  
+
+    封装执行查询语句（select） 和非查询(增删改)语句方法
+    非查询：返回true false
+    查询： 需要对查询结果进行返回处理
+
+
+    在访问后台页面是，要先判断用户之前是否登录过，
+    如果没有登录跳转到登录页进行进行登录，如果登录过就正常访问 
+
+三、 cookie 和 session 配合完成 登录状态保存 
+
+    cookie的特性：
+    浏览器端存储数据容器
+    1- cookie大小4bk左右
+    2- cookie中的数据能被同一个网站的多个页面共享；
+    3- cookie 在每次请求服务器时，都会将cookie的数据添加请求报文中，传递给服务器  $_COOKIE 
+    4- 服务器可以设置响应报文，浏览器接受到响应报文后，会根据响应报文去自行设置cookie 
+
+    session特性：
+    服务器端存储数据容器
+    session中的数据能被同一个网站的多个页面共享
+
+    session使用时必须开启session ， session_start(); 
+
+    session_start();做的三件事：
+    1-生成一个sessionId
+    2-会创建一个session文件(存储空间)，用于存放数据
+    3-会通过setcookie将生成的sessionId 传递浏览器的cookie  
+
+
+    cookie 和 session ,判断用户之前是否登录过； 
+
+    用户登录成功时，给用户添加一个标记； 后面判断用户是否登录， 看用户是否携带标记；
+
+    在用户登录成功时，给用户一个密码 ,存放在cookie中（sessionId)[服务端也会存储一个对应密码]
+
+    判断用户是否登录过，判断用户的cookie中是否携带有sessionID;
+
+
+项目目的：  复习 php  数据库 ajax  jq...  
+ 前端后端半分离
+
+
+ 四、 二级导航实现思路：
+    如果是文章模块： 
+    1-文章的大导航高亮   li加 active类 
+    2-二级导航展开       ul加 in类名
+    3-箭头向下           a去掉collapsed 类名
+    4-对应二级导航高亮   小li添加active类名 
+
+    注意： 文章模块 有多个页面构成， 写文字  所有文章  分类构成，
+    如果当前页面是三个页面中任何一个，就要给文章加高亮效果；
+
+五、 连接查询语法（多表查询）：
+    select * from  表A  join 表B  on 联合条件（表A的外键 = 表B的主键 ）
+
+    主键： 数据库中数据唯一标识， 一般是id 
+    外键： 通过外键可以关联到另一张表的主键
+
+    select posts.*, users.nickname from posts  -- 查询文章的全部数据和 用户的昵称 
+    join users on posts.user_id = users.id     -- 联合用户表一起查询
+    where posts.id = 3                         -- 筛选条件
+
+
+六、 查询评论全部数据和文章名称 
+    select comments.*, posts.title from comments   -- 查询评论数据 和文章标题
+    join posts on comments.post_id = posts.id      -- 联合文章表
+    limit 30, 10                  									-- 分页，截取指定页面数据
+    -- 每页起始索引值 =  (页码 - 1) * 每页数据条数
+    -- 第1页  0  
+    -- 第2页  10 
+    -- 第3页  20
+    -- 第4页  30
+
+七、分页标签页码的个数，是根据数据库中的数据总数动态生成的；
+    在做分页之前，要查询出数据库中数据的总数，根据数据总数来生成；
+
+    -- 查询判断 评论对应文章是否存在，文章存在，则评论有效
+select count(*) from comments  join posts where comments.post_id = posts.id;
+
+用户使用网页的过程
+    用户操作前端页面--->前端向后台发送请求--->后台服务器处理请求--->对数据的数据增删改查
+
+    开发时，是逆向的 
+    1-先把相关sql语句测试准备好
+    2-将测试好sql语句拿到后台封装成接口，写好接口文档
+    3-前端请求接口，渲染数据；
+
+计算结果集的数量： select count(*) as 'total' from users;
+
+
+连接查询
+select * from 表A  join 表B on 表A.外键 = 表B.主键  where 表A.id = 3;
+
+
+
+1-  onchange
+        当表单状态改变时触发 
+        输入框会在失去焦点是触发
+
+    oninput
+        当用户输入时触发
+        h5新增的事件，  $('div').input() //不支持 
+
+2-时间格式化：
+    moment.js
+    moment(时间).format(格式)
+    YMDHms(年月日时分秒)
+
+3-图片上传格式限制
+    accept = "image/*"  只能选择图片文件
+
+4-图片预览
+    input.onchange = function () {
+        var file = this.files[0]; //获取第一个上传文件
+        var url = URL.createObjectURL(file); //获取图片的url地址
+        img.src = url; 
+    }
+
+
+修改文章思路：
+    1-点击编辑按钮，获取当前文章的数据，并展示出来，供用户修改
+    2-修改完成后，点击保存按钮，获取修改后的数据，更新回数据库中
+    3-重新渲染文字列表页，看到修改的效果 
+
+
+   0- 正式做修改功能之前，要将模态框准备好
+   1- 点击编辑按钮    
+    获取 对应文章的数据 
+        1-写接口
+        2-ajax请求数据   
+    将数据填充在模态框中，供修改
+
+
+
+
+
+
+
+
+    
+
